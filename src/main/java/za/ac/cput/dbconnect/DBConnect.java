@@ -2,6 +2,7 @@ package za.ac.cput.dbconnect;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -28,5 +29,14 @@ public class DBConnect {
   
   public static void main(String[] args) throws SQLException {
     System.out.println(makeConnection().getMetaData().getDriverName());
+    
+    Connection con = makeConnection();
+    String sql = "CREATE TABLE users ("
+            + "user_id int primary key NOT NULL, "
+            + "fname VARCHAR(255) NOT NULL,"
+            + "last_name VARCHAR(255) NOT NULL)";
+    PreparedStatement ps = con.prepareStatement(sql);
+    boolean result = ps.execute();
+    
   }
 }
